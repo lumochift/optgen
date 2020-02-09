@@ -1,3 +1,3 @@
 # optgen
 
-Optional function generator from struct
+Optional function generator from struct.
