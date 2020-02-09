@@ -25,6 +25,8 @@ Usage of ./optgen:
   -w    enable write mode
 ```
 
+- Generate file with default tags `opt`
+  
 ```go
 //thing.go
 package foo
