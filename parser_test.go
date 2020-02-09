@@ -45,25 +45,29 @@ func TestGetOptTags(t *testing.T) {
 		args args
 		want []Tag
 	}{
-		"foo": {
-			args: args{sourcePath: "./testfile/foo.sample", structName: "Thing"},
-			want: []Tag{field1, field2},
-		},
-		"foo with defined tags": {
-			args: args{sourcePath: "./testfile/foo.sample", tag: "opt", structName: "Thing"},
-			want: []Tag{field1, field2},
-		},
-		"fooJerax": {
-			args: args{sourcePath: "./testfile/fooJerax.sample", tag: "jerax", structName: "Thing"},
-			want: []Tag{field1, field2},
-		},
-		"fooJerax want dendy": {
-			args: args{sourcePath: "./testfile/fooJerax.sample", tag: "dendy", structName: "Thing"},
-			want: []Tag{field3},
-		},
-		"missing struct": {
-			args: args{sourcePath: "./testfile/fooJerax.sample", tag: "jerax", structName: "Thingy"},
-			want: []Tag{},
+		// "foo": {
+		// 	args: args{sourcePath: "./testfile/foo.sample", structName: "Thing"},
+		// 	want: []Tag{field1, field2},
+		// },
+		// "foo with defined tags": {
+		// 	args: args{sourcePath: "./testfile/foo.sample", tag: "opt", structName: "Thing"},
+		// 	want: []Tag{field1, field2},
+		// },
+		// "fooJerax": {
+		// 	args: args{sourcePath: "./testfile/fooJerax.sample", tag: "jerax", structName: "Thing"},
+		// 	want: []Tag{field1, field2},
+		// },
+		// "fooJerax want dendy": {
+		// 	args: args{sourcePath: "./testfile/fooJerax.sample", tag: "dendy", structName: "Thing"},
+		// 	want: []Tag{field3},
+		// },
+		// "missing struct": {
+		// 	args: args{sourcePath: "./testfile/fooJerax.sample", tag: "jerax", structName: "Thingy"},
+		// 	want: []Tag{},
+		// },
+		"All": {
+			args: args{sourcePath: "./testfile/foo.sample", tag: "_all_", structName: "Thing"},
+			want: []Tag{field1, field2, field3},
 		},
 	}
 	for name, tt := range tests {

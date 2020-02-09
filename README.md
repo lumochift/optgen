@@ -10,6 +10,21 @@ go get github.com/lumochift/optgen
 
 ## How to use
 
+- Help function
+  
+```bash
+Usage of ./optgen:
+  -all
+        generate all fields
+  -file string
+        path file
+  -name string
+        struct name
+  -tag string
+        custom tag (default "opt")
+  -w    enable write mode
+```
+
 ```go
 //thing.go
 package foo
@@ -29,7 +44,7 @@ type ThingThong struct {
 type Data string
 ```
 
-For example we have `thing.go` and need to generate functional option for struct `Thing`:
+For example we have `thing.go` and need to generate functional option for struct `Thing`, only field with `opt` will generated:
 
 ```bash
 optgen -file thing.go -name Thing

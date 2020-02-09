@@ -14,7 +14,7 @@ import (
 
 var (
 	sourceFile, tagName, structName string
-	writeMode                       bool
+	writeMode, allFields            bool
 
 	funcMap = template.FuncMap{
 		"title":   strings.Title,
@@ -27,6 +27,7 @@ func initCLI() {
 	flag.StringVar(&tagName, "tag", "opt", "custom tag")
 	flag.StringVar(&structName, "name", "", "struct name")
 	flag.BoolVar(&writeMode, "w", false, "enable write mode")
+	flag.BoolVar(&allFields, "all", false, "generate all fields")
 	flag.Parse()
 	const exampleMessage = "e.g: optgen -file sample-file.go -name Thing"
 	if sourceFile == "" || structName == "" {
@@ -50,6 +51,10 @@ func main() {
 	type TemplateData struct {
 		StructName string
 		Tags       []Tag
+	}
+
+	if allFields {
+		tagName = "_all_"
 	}
 
 	tags := GetTags(f, structName, tagName)

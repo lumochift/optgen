@@ -22,9 +22,9 @@ func getType(n ast.Expr) string {
 		return "*" + getType(x.X)
 	case *ast.MapType:
 		return fmt.Sprintf("map[%s]%s", getType(x.Key), getType(x.Value))
+	default:
+		return ""
 	}
-
-	return ""
 }
 
 // GetTags get tag from existing tags
@@ -40,7 +40,8 @@ func GetTags(f *ast.File, structName, tag string) []Tag {
 				return false
 			}
 			for _, field := range x.Type.(*ast.StructType).Fields.List {
-				if field.Tag != nil && strings.Contains(field.Tag.Value, tag) {
+				fmt.Println(getType(field.Type))
+				if tag == "_all_" || (field.Tag != nil && strings.Contains(field.Tag.Value, tag)) {
 					tags = append(tags, Tag{
 						Name:     field.Names[0].Name,
 						DataType: getType(field.Type),
