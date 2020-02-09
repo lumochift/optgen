@@ -1,0 +1,7 @@
+package foo
+
+type Thing struct {
+    Field1 string `jerax` 
+    Field2 []int  `jerax`
+    Field3 map[byte]float64 `json:"dendy"`
+}
