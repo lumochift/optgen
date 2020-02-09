@@ -38,7 +38,7 @@ optgen -file thing.go -name Thing
 Output:
 
 ```go
-/ Option is a Thing configurator to be supplied to NewThing() function.
+// Option is a Thing configurator to be supplied to NewThing() function.
 type Option func(*Thing)
 
 
