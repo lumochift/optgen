@@ -5,7 +5,7 @@ Optional function generator from struct.
 ## Installation
 
 ```
-go get github.com/lucmohift/optgen
+go get github.com/lumochift/optgen
 ```
 
 ## How to use
