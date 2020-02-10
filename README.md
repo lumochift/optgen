@@ -1,3 +1,8 @@
+[![GoDoc](https://godoc.org/github.com/lumochift/optgen?status.svg)](https://godoc.org/github.com/lumochift/optgen)
+[![Build Status](https://github.com/lumochift/optgen/workflows/Go%20workflow/badge.svg)](https://github.com/lumochift/optgen/actions)
+[![codecov](https://codecov.io/gh/lumochift/optgen/branch/master/graph/badge.svg)](https://codecov.io/gh/lumochift/optgen)
+[![Go Report Card](https://goreportcard.com/badge/github.com/lumochift/optgen)](https://goreportcard.com/report/github.com/lumochift/optgen)
+
 # optgen
 
 Optional function generator from struct.
@@ -5,10 +10,10 @@ Optional function generator from struct.
 ## Installation
 
 ```
-go get github.com/lumochift/optgen
+go get github.com/lumochift/optgen/cli/optgen
 ```
 
-## How to use
+## Usage
 
 - Help function
   
@@ -36,14 +41,6 @@ type Thing struct {
     Field2 []*int  `opt`
     Field3 map[byte]float64
 }
-
-type ThingThong struct {
-    F1 string `opt` 
-    F2 []int  `opt`
-    F3 map[byte]float64
-}
-
-type Data string
 ```
 
 For example we have `thing.go` and need to generate functional option for struct `Thing`, only field with `opt` will generated:
