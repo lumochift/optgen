@@ -13,16 +13,16 @@ type Tag struct {
 	DataType string
 }
 
-func getType(n ast.Expr) string {
+func GetType(n ast.Expr) string {
 	switch x := n.(type) {
 	case *ast.ArrayType:
-		return "[]" + getType(x.Elt)
+		return "[]" + GetType(x.Elt)
 	case *ast.Ident:
 		return x.Name
 	case *ast.StarExpr:
-		return "*" + getType(x.X)
+		return "*" + GetType(x.X)
 	case *ast.MapType:
-		return fmt.Sprintf("map[%s]%s", getType(x.Key), getType(x.Value))
+		return fmt.Sprintf("map[%s]%s", GetType(x.Key), GetType(x.Value))
 	default:
 		return ""
 	}
@@ -41,11 +41,11 @@ func GetTags(f *ast.File, structName, tag string) []Tag {
 				return false
 			}
 			for _, field := range x.Type.(*ast.StructType).Fields.List {
-				fmt.Println(getType(field.Type))
+				fmt.Println(GetType(field.Type))
 				if tag == "_all_" || (field.Tag != nil && strings.Contains(field.Tag.Value, tag)) {
 					tags = append(tags, Tag{
 						Name:     field.Names[0].Name,
-						DataType: getType(field.Type),
+						DataType: GetType(field.Type),
 					})
 				}
 			}
