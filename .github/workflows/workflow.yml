@@ -18,7 +18,7 @@ jobs:
       - name: Get dependencies
         run: go get -t -v
       - name: Run test
-        run: go test -test.v -test.coverprofile=coverage.out -test.covermode=count
+        run: go test ./... -test.v -test.coverprofile=coverage.out -test.covermode=count
       - name: Publish coverage
         if: matrix.os == 'ubuntu-latest'
         env:
