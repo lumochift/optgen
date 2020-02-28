@@ -1,5 +1,5 @@
-// package optgen provides functionality to generate functional option approach by given struct
-package optgen
+// package generator provides functionality to generate functional option approach by given struct
+package generator
 
 import (
 	"fmt"
