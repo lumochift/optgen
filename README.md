@@ -1,16 +1,20 @@
+# optgen
+
 [![GoDoc](https://godoc.org/github.com/lumochift/optgen?status.svg)](https://godoc.org/github.com/lumochift/optgen)
 [![Build Status](https://github.com/lumochift/optgen/workflows/Go%20workflow/badge.svg)](https://github.com/lumochift/optgen/actions)
 [![codecov](https://codecov.io/gh/lumochift/optgen/branch/master/graph/badge.svg)](https://codecov.io/gh/lumochift/optgen)
 [![Go Report Card](https://goreportcard.com/badge/github.com/lumochift/optgen)](https://goreportcard.com/report/github.com/lumochift/optgen)
 
-# optgen
-
 Optional function generator from struct.
+
+## Limitation
+
+- Flag `-w` currently cannot update generated code, only append code
 
 ## Installation
 
-```
-go get github.com/lumochift/optgen/cli/optgen
+```bash
+go get github.com/lumochift/optgen/cmd/optgen
 ```
 
 ## Usage
