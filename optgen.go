@@ -41,7 +41,6 @@ func GetTags(f *ast.File, structName, tag string) []Tag {
 				return false
 			}
 			for _, field := range x.Type.(*ast.StructType).Fields.List {
-				fmt.Println(GetType(field.Type))
 				if tag == "_all_" || (field.Tag != nil && strings.Contains(field.Tag.Value, tag)) {
 					tags = append(tags, Tag{
 						Name:     field.Names[0].Name,
