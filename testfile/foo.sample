@@ -1,9 +1,14 @@
 package foo
 
+import (
+    "net/http"
+)
+
 type Thing struct {
     Field1 string `opt` 
     Field2 []*int  `opt`
     Field3 map[byte]float64
+    Field4 http.Header
 }
 
 type ThingThong struct {

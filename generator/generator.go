@@ -13,12 +13,15 @@ type Tag struct {
 	DataType string
 }
 
+// GetType determine type from expression
 func GetType(n ast.Expr) string {
 	switch x := n.(type) {
 	case *ast.ArrayType:
 		return "[]" + GetType(x.Elt)
 	case *ast.Ident:
 		return x.Name
+	case *ast.SelectorExpr:
+		return fmt.Sprintf("%s.%s", GetType(x.X), GetType(x.Sel))
 	case *ast.StarExpr:
 		return "*" + GetType(x.X)
 	case *ast.MapType:
@@ -28,7 +31,7 @@ func GetType(n ast.Expr) string {
 	}
 }
 
-// GetTags get tag from existing tags
+// GetTags from existing tags
 func GetTags(f *ast.File, structName, tag string) []Tag {
 	if tag == "" {
 		tag = `opt`

@@ -36,6 +36,9 @@ func TestGetOptTags(t *testing.T) {
 
 		field3 = generator.Tag{Name: "Field3",
 			DataType: "map[byte]float64"}
+
+		field4 = generator.Tag{Name: "Field4",
+			DataType: "http.Header"}
 	)
 	type args struct {
 		sourcePath string
@@ -72,7 +75,7 @@ func TestGetOptTags(t *testing.T) {
 		},
 		"All": {
 			args: args{sourcePath: ".././testfile/foo.sample", Tag: "_all_", structName: "Thing"},
-			want: []generator.Tag{field1, field2, field3},
+			want: []generator.Tag{field1, field2, field3, field4},
 		},
 	}
 	for name, tt := range tests {
@@ -98,6 +101,10 @@ func Test_getType(t *testing.T) {
 		"ident": {
 			args: args{&ast.Ident{Name: "int"}},
 			want: "int",
+		},
+		"header": {
+			args: args{&ast.Ident{Name: "http.Header"}},
+			want: "http.Header",
 		},
 		"empty": {
 			args: args{nil},
