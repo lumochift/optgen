@@ -18,7 +18,9 @@ import (
 
 var (
 	sourceFile, tagName, structName, optName string
-	writeMode, allFields                     bool
+	writeMode, allFields, showVersion        bool
+
+	version string = "dev"
 
 	funcMap = template.FuncMap{
 		"title":   strings.Title,
@@ -32,16 +34,25 @@ func initCLI() {
 	flag.StringVar(&structName, "name", "", "struct name")
 	flag.StringVar(&optName, "optname", "Option", "option name")
 	flag.BoolVar(&writeMode, "w", false, "enable write mode")
+	flag.BoolVar(&showVersion, "v", false, "show version")
 	flag.BoolVar(&allFields, "all", false, "generate all fields")
 	flag.Parse()
-	const exampleMessage = "e.g: optgen -file sample-file.go -name Thing"
-	if sourceFile == "" || structName == "" {
-		log.Fatalf("Source file and struct name must be provided.\n%s", exampleMessage)
-	}
 }
 
 func main() {
 	initCLI()
+
+	if showVersion {
+		fmt.Printf("version: %s", version)
+
+		return
+	}
+
+	const exampleMessage = "e.g: optgen -file sample-file.go -name Thing"
+	if sourceFile == "" || structName == "" {
+		log.Fatalf("Source file and struct name must be provided.\n%s", exampleMessage)
+	}
+
 	source, err := ioutil.ReadFile(sourceFile)
 	if err != nil {
 		log.Fatal(err)

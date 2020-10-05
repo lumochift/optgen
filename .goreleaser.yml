@@ -1,0 +1,21 @@
+project_name: optgen
+env:
+  - GO111MODULE=on
+builds:
+  -
+    main: main.go
+    binary: optgen
+    ldflags:
+      - -s -w
+      - -X main.Version={{.Major}}.{{.Minor}}.{{.Patch}}
+    env:
+      - CGO_ENABLED=0
+    goos:
+      - darwin
+      - linux
+      - windows
+    goarch:
+      - amd64
+    hooks:
+      post:
+       - upx --brute "{{ .Path }}"
