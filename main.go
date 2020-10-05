@@ -17,8 +17,8 @@ import (
 )
 
 var (
-	sourceFile, tagName, structName string
-	writeMode, allFields            bool
+	sourceFile, tagName, structName, optName string
+	writeMode, allFields                     bool
 
 	funcMap = template.FuncMap{
 		"title":   strings.Title,
@@ -30,6 +30,7 @@ func initCLI() {
 	flag.StringVar(&sourceFile, "file", "", "path file")
 	flag.StringVar(&tagName, "tag", "opt", "custom tag")
 	flag.StringVar(&structName, "name", "", "struct name")
+	flag.StringVar(&optName, "optname", "Option", "option name")
 	flag.BoolVar(&writeMode, "w", false, "enable write mode")
 	flag.BoolVar(&allFields, "all", false, "generate all fields")
 	flag.Parse()
@@ -55,6 +56,7 @@ func main() {
 	type TemplateData struct {
 		StructName string
 		Tags       []generator.Tag
+		OptName    string
 	}
 
 	if allFields {
