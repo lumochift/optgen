@@ -57,19 +57,19 @@ func GetTags(f *ast.File, structName, tag string) []Tag {
 	return tags
 }
 
-const CodeTemplate string = `// Option is a {{.StructName}} configurator to be supplied to New{{.StructName}}() function.
-type Option func(*{{.StructName}})
+const CodeTemplate string = `// {{.OptName}} is a {{.StructName}} configurator to be supplied to New{{.StructName}}() function.
+type {{.OptName}} func(*{{.StructName}})
 
 
 // New{{.StructName}} returns a new {{.StructName}}.
-func New{{.StructName}}(options ...Option) (*{{.StructName}}, error) {
+func New{{.StructName}}(opt ...{{.OptName}}) (*{{.StructName}}, error) {
 
 	// Prepare a {{.StructName}} with default host.
 	{{toLower .StructName}} := &{{.StructName}}{}
 
 	// Apply options.
-	for _, option := range options {
-		option({{toLower .StructName}})
+	for _, o := range opt {
+		o({{toLower .StructName}})
 	}
 
 	// Do anything here
@@ -79,7 +79,7 @@ func New{{.StructName}}(options ...Option) (*{{.StructName}}, error) {
 {{ $structName:=.StructName}}
 {{ range .Tags }}
 // Set{{title .Name}} sets the {{title .Name}}
-func Set{{title .Name}}({{toLower .Name}} {{.DataType}}) Option {
+func Set{{title .Name}}({{toLower .Name}} {{.DataType}}) {{.OptName}} {
 	return func(c *{{$structName}}) {
 		c.{{.Name}} = {{toLower .Name}}
 	}

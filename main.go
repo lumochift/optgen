@@ -17,8 +17,8 @@ import (
 )
 
 var (
-	sourceFile, tagName, structName   string
-	writeMode, allFields, showVersion bool
+	sourceFile, tagName, structName, optName string
+	writeMode, allFields, showVersion        bool
 
 	version string = "dev"
 
@@ -32,6 +32,7 @@ func initCLI() {
 	flag.StringVar(&sourceFile, "file", "", "path file")
 	flag.StringVar(&tagName, "tag", "opt", "custom tag")
 	flag.StringVar(&structName, "name", "", "struct name")
+	flag.StringVar(&optName, "optname", "Option", "option name")
 	flag.BoolVar(&writeMode, "w", false, "enable write mode")
 	flag.BoolVar(&showVersion, "v", false, "show version")
 	flag.BoolVar(&allFields, "all", false, "generate all fields")
@@ -66,6 +67,7 @@ func main() {
 	type TemplateData struct {
 		StructName string
 		Tags       []generator.Tag
+		OptName    string
 	}
 
 	if allFields {
@@ -80,6 +82,7 @@ func main() {
 	if err := tmpl.Execute(&buf, TemplateData{
 		Tags:       tags,
 		StructName: structName,
+		OptName:    optName,
 	}); err != nil {
 		log.Fatal(err)
 	}
