@@ -62,14 +62,14 @@ type {{.OptName}} func(*{{.StructName}})
 
 
 // New{{.StructName}} returns a new {{.StructName}}.
-func New{{.StructName}}(options ...{{.OptName}}) (*{{.StructName}}, error) {
+func New{{.StructName}}(opt ...{{.OptName}}) (*{{.StructName}}, error) {
 
 	// Prepare a {{.StructName}} with default host.
 	{{toLower .StructName}} := &{{.StructName}}{}
 
 	// Apply options.
-	for _, option := range options {
-		option({{toLower .StructName}})
+	for _, o := range opt {
+		o({{toLower .StructName}})
 	}
 
 	// Do anything here

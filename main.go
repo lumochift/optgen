@@ -82,6 +82,7 @@ func main() {
 	if err := tmpl.Execute(&buf, TemplateData{
 		Tags:       tags,
 		StructName: structName,
+		OptName:    optName,
 	}); err != nil {
 		log.Fatal(err)
 	}
