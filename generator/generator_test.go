@@ -4,7 +4,7 @@ import (
 	"go/ast"
 	"go/parser"
 	"go/token"
-	"io/ioutil"
+	"os"
 	"testing"
 
 	"github.com/google/go-cmp/cmp"
@@ -14,7 +14,7 @@ import (
 
 func getTokenFileset(path string) (*ast.File, error) {
 	fset := token.NewFileSet()
-	buffer, err := ioutil.ReadFile(path)
+	buffer, err := os.ReadFile(path)
 	if err != nil {
 		return nil, err
 

@@ -7,7 +7,7 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest, macos-latest]
-        go: ['1.12', '1.13']
+        go: ['1.19']
     steps:
       - name: Go ${{ matrix.go }}
         uses: actions/setup-go@v1
@@ -18,7 +18,7 @@ jobs:
       - name: Get dependencies
         run: go get -t -v
       - name: Run test
-        run: go test ./... -test.v -test.coverprofile=coverage.out -test.covermode=count
+        run: go test ./... -test.v -test.coverprofile=coverage.out
       - name: Publish coverage
         if: matrix.os == 'ubuntu-latest'
         env:
