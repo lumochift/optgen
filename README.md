@@ -14,7 +14,7 @@ Optional function generator from struct.
 ## Installation
 
 ```bash
-go get github.com/lumochift/optgen
+go install github.com/lumochift/optgen@latest
 ```
 
 ## Usage
