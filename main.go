@@ -83,7 +83,6 @@ func main() {
 
 	tmpl := template.Must(template.New("generator").Funcs(funcMap).Parse(generator.CodeTemplate))
 	var buf bytes.Buffer
-	fmt.Println(tags, structName)
 	if err := tmpl.Execute(&buf, TemplateData{
 		Tags:       tags,
 		StructName: structName,

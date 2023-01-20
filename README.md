@@ -56,36 +56,32 @@ optgen -file thing.go -name Thing
 Output:
 
 ```go
-// Option is a Thing configurator to be supplied to NewThing() function.
-type Option func(*Thing)
+// NewThing returns a *Thing.
+func NewThing(opt ...func(*Thing)) *Thing {
 
-
-// NewThing returns a new Thing.
-func NewThing(options ...Option) (*Thing, error) {
-
-        // Prepare a Thing with default host.
+        // Prepare a Thing 
         thing := &Thing{}
 
         // Apply options.
-        for _, option := range options {
-                option(thing)
+        for _, o := range opt {
+                o(thing)
         }
 
         // Do anything here
 
-        return thing, nil
+        return thing
 }
 
 
 // SetField1 sets the Field1
-func SetField1(field1 string) Option {
+func SetField1(field1 string) func(*Thing) {
         return func(c *Thing) {
                 c.Field1 = field1
         }
 }
 
 // SetField2 sets the Field2
-func SetField2(field2 []*int) Option {
+func SetField2(field2 []*int) func(*Thing) {
         return func(c *Thing) {
                 c.Field2 = field2
         }
